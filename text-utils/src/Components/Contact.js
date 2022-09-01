@@ -1,6 +1,10 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 export default function Contact(props) {
+  const [title, setTitle] = useState("Text Utils | Contact");
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
   return (
     <>
       <div

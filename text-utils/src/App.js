@@ -23,12 +23,16 @@ function App() {
       setTheme("dark");
       document.body.style.background = "#18191A";
       document.body.style.color = "white";
+      document.title = "TextUtils | Dark";
       showAlert("Dark Mode Enable", "success");
+      setInterval(() => {
+        showAlert("", "");
+      }, 8000);
     } else {
       setTheme("light");
       document.body.style.background = "white";
       document.body.style.color = "black";
-      showAlert("Light Mode Enable", "warning");
+      document.title = "TextUtils | Light";
     }
   };
   return (

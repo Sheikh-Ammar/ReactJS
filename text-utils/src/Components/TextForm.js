@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function TextForm(props) {
   const [text, setText] = useState("");
+  const [title, setTitle] = useState("Text Utils | Home");
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   const handleOnChange = (event) => {
     setText(event.target.value);
@@ -26,6 +31,7 @@ export default function TextForm(props) {
     newText.select();
     newText.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(newText.value);
+    document.getSelection().removeAllRanges();
     props.showAlert("Copied", "success");
   };
   const handleSpaces = () => {
@@ -58,30 +64,52 @@ export default function TextForm(props) {
               onChange={handleOnChange}
             ></textarea>
           </div>
-          <button className="btn btn-primary btn-sm mx-1" onClick={handleUpper}>
+          <button
+            className="btn btn-primary btn-sm mx-1 my-1"
+            onClick={handleUpper}
+            disabled={text.length === 0}
+          >
             Convert Uppercase
           </button>
-          <button className="btn btn-primary btn-sm mx-1" onClick={handleLower}>
+          <button
+            className="btn btn-primary btn-sm mx-1 my-1"
+            onClick={handleLower}
+            disabled={text.length === 0}
+          >
             Convert Lowercase
           </button>
-          <button className="btn btn-primary btn-sm mx-1" onClick={handleClear}>
+          <button
+            className="btn btn-primary btn-sm mx-1 my-1"
+            onClick={handleClear}
+            disabled={text.length === 0}
+          >
             Clear Text
           </button>
-          <button className="btn btn-primary btn-sm mx-1" onClick={handleCopy}>
+          <button
+            className="btn btn-primary btn-sm mx-1 my-1"
+            onClick={handleCopy}
+            disabled={text.length === 0}
+          >
             Copy Text
           </button>
-          <button className="btn btn-primary btn-sm mx-1" onClick={handleHtml}>
+          <button
+            className="btn btn-primary btn-sm mx-1 my-1"
+            onClick={handleHtml}
+            disabled={text.length === 0}
+          >
             Convert Html To Text
           </button>
           <button
             className="btn btn-primary btn-sm mx-1"
             onClick={handleVowelCheck}
+            disabled={text.length === 0}
           >
             Check Vowles
           </button>
           <button
             className="btn btn-primary btn-sm mx-1"
             onClick={handleSpaces}
+            disabled={text.length === 0}
           >
             Remove Spaces
           </button>
@@ -96,8 +124,13 @@ export default function TextForm(props) {
           <h4 className="my-3">Your Text-Summary Is Here</h4>
           <p className="text-danger">
             <b>
-              {text.split(" ").length} Words, {text.length} Characters,{" "}
-              {0.008 * text.split(" ").length} Minutes Read
+              {
+                text.split(" ").filter((element) => {
+                  return element.length != 0;
+                }).length
+              }{" "}
+              Words, {text.length} Characters, {0.008 * text.split(" ").length}{" "}
+              Minutes Read
             </b>
           </p>
         </div>

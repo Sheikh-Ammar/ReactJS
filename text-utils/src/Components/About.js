@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function About(props) {
+  const [title, setTitle] = useState("Text Utils | About");
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
   return (
     <>
       <div
