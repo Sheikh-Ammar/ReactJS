@@ -4,20 +4,44 @@ export default function TextForm(props) {
   const [text, setText] = useState("");
 
   const handleOnChange = (event) => {
-    console.log("hoc");
     setText(event.target.value);
   };
   const handleUpper = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Convert To Upper Case", "success");
   };
   const handleLower = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Convert To Lower Case", "success");
   };
   const handleClear = () => {
     let newText = "";
     setText(newText);
+    props.showAlert("Spaces Remove Done", "success");
+  };
+  const handleCopy = () => {
+    let newText = document.getElementById("mybox");
+    newText.select();
+    newText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(newText.value);
+    props.showAlert("Copied", "success");
+  };
+  const handleSpaces = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+    props.showAlert("Remove Space Done", "success");
+  };
+  const handleHtml = () => {
+    console.log(text);
+    let newText = text.replace(/<\/?[^>]+(>|$)/g, "");
+    setText(newText);
+    props.showAlert("Convert Html To Text", "success");
+  };
+  const handleVowelCheck = () => {
+    let count = text.match(/[aeiou]/gi).length;
+    alert(`You have  ${count} no of vowels`);
   };
 
   return (
@@ -29,6 +53,7 @@ export default function TextForm(props) {
             <textarea
               className="form-control"
               rows="8"
+              id="mybox"
               value={text}
               onChange={handleOnChange}
             ></textarea>
@@ -41,6 +66,24 @@ export default function TextForm(props) {
           </button>
           <button className="btn btn-primary btn-sm mx-1" onClick={handleClear}>
             Clear Text
+          </button>
+          <button className="btn btn-primary btn-sm mx-1" onClick={handleCopy}>
+            Copy Text
+          </button>
+          <button className="btn btn-primary btn-sm mx-1" onClick={handleHtml}>
+            Convert Html To Text
+          </button>
+          <button
+            className="btn btn-primary btn-sm mx-1"
+            onClick={handleVowelCheck}
+          >
+            Check Vowles
+          </button>
+          <button
+            className="btn btn-primary btn-sm mx-1"
+            onClick={handleSpaces}
+          >
+            Remove Spaces
           </button>
         </div>
       </div>
