@@ -75,7 +75,7 @@ export default class News extends Component {
             <b>News Monkey Top-Headlines</b>
           </h2>
           {this.state.loading && <Spinner />}
-          <div className="row mt-5">
+          <div className="row mt-5 d-flex justify-content-center align-items-center">
             {!this.state.loading &&
               this.state.articles.map((element) => {
                 return (
@@ -89,6 +89,9 @@ export default class News extends Component {
                       }
                       imgUrl={element.urlToImage}
                       newsUrl={element.url}
+                      author={element.author}
+                      date={element.publishedAt}
+                      source={element.source.name}
                     />
                   </div>
                 );
