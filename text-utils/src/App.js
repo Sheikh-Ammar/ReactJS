@@ -27,7 +27,7 @@ function App() {
       showAlert("Dark Mode Enable", "success");
       setInterval(() => {
         showAlert("", "");
-      }, 8000);
+      }, 3000);
     } else {
       setTheme("light");
       document.body.style.background = "white";
