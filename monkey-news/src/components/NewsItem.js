@@ -7,7 +7,7 @@ export default class NewsItem extends Component {
   render() {
     return (
       <>
-        <div className="card mb-3" style={{ width: "18rem" }}>
+        <div className="card mb-3">
           <img
             src={
               this.props.imgUrl
@@ -16,7 +16,7 @@ export default class NewsItem extends Component {
             }
             className="card-img-top"
             alt={this.props.title}
-            style={{ width: "100%", height: "25vh" }}
+            style={{ width: "100%", height: "30vh" }}
           />
           <div className="card-body">
             <h5 className="card-title">{this.props.title}</h5>
