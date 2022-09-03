@@ -18,11 +18,11 @@ export default class NewsItem extends Component {
             alt={this.props.title}
             style={{ width: "100%", height: "30vh" }}
           />
-            <span class="position-absolute top-0 translate-middle badge rounded-pill bg-success" style={{left:"90%", zIndex:"1"}}>{this.props.source}</span>
+            <span className="position-absolute top-0 translate-middle badge rounded-pill bg-success" style={{left:"90%", zIndex:"1"}}>{this.props.source}</span>
           <div className="card-body">
             <h5 className="card-title">{this.props.title}</h5>
             <p className="card-text">{this.props.description}....</p>
-            <p class="card-text"><small class="text-muted">By {this.props.author ? this.props.author : "Unknown" } On {new Date(this.props.date).toGMTString()}</small></p>
+            <p className="card-text"><small className="text-muted">By {this.props.author ? this.props.author : "Unknown" } On {new Date(this.props.date).toGMTString()}</small></p>
             <a
               href={this.props.newsUrl}
               className="btn btn-sm btn-success"

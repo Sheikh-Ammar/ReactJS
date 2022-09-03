@@ -48,7 +48,6 @@ export default class News extends Component {
     });
   };
   handleNextClick = async () => {
-    console.log("nb");
     let url = `https://newsapi.org/v2/top-headlines?country=${
       this.props.country
     }&category=${
@@ -64,7 +63,6 @@ export default class News extends Component {
       page: this.state.page + 1,
       articles: parseData.articles,
     });
-    console.log("na");
   };
 
   render() {
@@ -81,12 +79,7 @@ export default class News extends Component {
                 return (
                   <div className="col-md-4" key={element.url}>
                     <NewsItem
-                      title={element.title ? element.title.slice(0, 20) : ""}
-                      description={
-                        element.description
-                          ? element.description.slice(0, 88)
-                          : ""
-                      }
+                      title={element.title ? element.title.slice(0, 20) : ""} description={element.description ? element.description.slice(0, 88) : ""}
                       imgUrl={element.urlToImage}
                       newsUrl={element.url}
                       author={element.author}
