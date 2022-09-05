@@ -1,23 +1,47 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../Row.css";
+import "../css/Row.css";
+import Youtube from "react-youtube";
+// import movieTrailer from "movie-trailer";
 
 const Img_base_url = "https://image.tmdb.org/t/p/original";
 function Row(props) {
   const [movies, setMovies] = useState([]);
+  const [trailerUrl, setTrailerUrl] = useState("");
   let url = props.fetchURL;
 
   // CODE RUN ON SPECIFIC CONDITION
   useEffect(() => {
-    // IF[] run once when row load and do not load again
     async function fetchData() {
       const request = await axios.get(url);
-      // URL LOOK: https://api.themoviedb.org/3/discover/tv?api_key=f758907605bef6fa1289e3de26d27a4e&with_networks=213
+
       setMovies(request.data.results);
       return request;
     }
     fetchData();
   }, [props.fetchURL]);
+
+  const opts = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  // const handleClick = (movie) => {
+  //   if (trailerUrl) {
+  //     setTrailerUrl("");
+  //   } else {
+  //     movieTrailer(null, { tmdbId: movie.id })
+  //       .then((url) => {
+  //         // https://www.youtube.com/watch?v=XtMThy80KqU
+  //         const urlParams = new URLSearchParams(new URL(url).search);
+  //         setTrailerUrl(urlParams.get("v"));
+  //       })
+  //       .catch((error) => console.error());
+  //   }
+  // };
 
   return (
     <>
@@ -29,6 +53,7 @@ function Row(props) {
             return (
               <>
                 <img
+                  // onClick={() => handleClick(movie)}
                   key={movie.id}
                   src={`${Img_base_url}${
                     props.isLargeRow ? movie.poster_path : movie.backdrop_path
@@ -42,6 +67,8 @@ function Row(props) {
             );
           })}
         </div>
+
+        {trailerUrl && <Youtube videoId={trailerUrl} opts={opts} />}
       </div>
     </>
   );

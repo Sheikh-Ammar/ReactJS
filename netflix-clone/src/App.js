@@ -1,6 +1,8 @@
-import "./App.css";
 import Banner from "./Components/Banner";
+import Navbar from "./Components/Navbar";
 import Row from "./Components/Row";
+
+import "./css/App.css";
 
 function App() {
   const API_KEY = "f758907605bef6fa1289e3de26d27a4e";
@@ -16,6 +18,7 @@ function App() {
   };
   return (
     <div className="app">
+      <Navbar />
       <Banner fetchURL={requests.fetchNetflixOriginals} />
 
       <Row
